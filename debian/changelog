@@ -1,0 +1,5 @@
+syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo1) precise; urgency=low
+
+  * Initial version for Precise.
+
+ -- Vincent Bernat <bernat@debian.org>  Tue, 14 Jul 2015 16:15:56 +0200
