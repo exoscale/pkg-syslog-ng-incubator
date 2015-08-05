@@ -1,0 +1,77 @@
+From a4935173c46d00ddf20bf8188b128aed6ff58717 Mon Sep 17 00:00:00 2001
+From: Vincent Bernat <vincent@bernat.im>
+Date: Wed, 5 Aug 2015 18:45:09 +0200
+Subject: [PATCH] date-parser: handle dates without a year
+
+This is a pretty common case (unfortunately). Try to guess the
+appropriate year: take the current year and remove one year if the month
+is to great compared to the current month. For example, if we received a
+message in March 2015 with a date in February, we assume February
+2015. With a date in March or April, we assume April 2015 (because it
+may be very late in March and some remote servers may have its clock
+off). However, we consider June to be too far away in the future to be
+in 2015 and therefore, the date will be June 2014.
+
+Signed-off-by: Vincent Bernat <vincent@bernat.im>
+---
+ modules/date/date-parser.c     | 17 +++++++++++++++++
+ modules/date/tests/test_date.c |  8 ++++++++
+ 2 files changed, 25 insertions(+)
+
+diff --git a/modules/date/date-parser.c b/modules/date/date-parser.c
+index 58b7db4b5f0e..9a5b945d4e49 100644
+--- a/modules/date/date-parser.c
++++ b/modules/date/date-parser.c
+@@ -99,6 +99,23 @@ date_parser_process (LogParser *s,
+ 
+   if (remaining == NULL) return FALSE;
+ 
++  /* The date may be missing. Try to use the current date as we can't
++   * do anything better... Don't try to be too smart with new year
++   * eve. */
++  if (tm.tm_year == 0)
++    {
++      /* Grab the year from the received timestamp */
++      struct tm nowtm;
++      LogStamp received = msg->timestamps[LM_TS_RECVD];
++      cached_gmtime(&received.tv_sec, &nowtm);
++      tm.tm_year = nowtm.tm_year;
++
++      /* Adjust the year if needed. Therefore, we don't need to care
++       * too much about timezones. */
++      if (tm.tm_mon > nowtm.tm_mon + 1)
++        tm.tm_year--;
++    }
++
+   /* mktime handles timezones horribly. It considers the time to be
+      local and also alter the parsed timezone. Try to fix all that. */
+   msg->timestamps[LM_TS_STAMP].tv_usec = 0;
+diff --git a/modules/date/tests/test_date.c b/modules/date/tests/test_date.c
+index 2b5ed264ecfe..a928c50913b0 100644
+--- a/modules/date/tests/test_date.c
++++ b/modules/date/tests/test_date.c
+@@ -24,6 +24,7 @@ testcase(gchar *msg, goffset offset, gchar *timezone, gchar *format, gchar *expe
+ 
+   parse_options.flags = 0;
+   logmsg = log_msg_new_empty();
++  logmsg->timestamps[LM_TS_RECVD].tv_sec = 1438793384; /* Wed Aug  5 2015 */
+   log_msg_set_value(logmsg, log_msg_get_value_handle("MESSAGE"), msg, -1);
+   nvtable = nv_table_ref(logmsg->payload);
+   success = log_parser_process(parser, &logmsg, NULL, log_msg_get_value(logmsg, LM_V_MESSAGE, NULL), -1);
+@@ -85,6 +86,13 @@ int main()
+   testcase("Tue, 27 Jan 2015 11:48:46", 0, "America/Phoenix", "%a, %d %b %Y %T", "2015-01-27T11:48:46-07:00");
+   testcase("Tue, 27 Jan 2015 11:48:46", 0, "+05:00", "%a, %d %b %Y %T", "2015-01-27T11:48:46+05:00");
+ 
++  /* Try without the year. */
++  testcase("01/Jul:00:40:07 +0500", 0, NULL, "%d/%b:%T %z", "2015-07-01T00:40:07+05:00");
++  testcase("01/Aug:00:40:07 +0500", 0, NULL, "%d/%b:%T %z", "2015-08-01T00:40:07+05:00");
++  testcase("01/Sep:00:40:07 +0500", 0, NULL, "%d/%b:%T %z", "2015-09-01T00:40:07+05:00");
++  testcase("01/Oct:00:40:07 +0500", 0, NULL, "%d/%b:%T %z", "2014-10-01T00:40:07+05:00");
++  testcase("01/Nov:00:40:07 +0500", 0, NULL, "%d/%b:%T %z", "2014-11-01T00:40:07+05:00");
++
+   app_shutdown();
+   return 0;
+ };
+-- 
+2.5.0
+

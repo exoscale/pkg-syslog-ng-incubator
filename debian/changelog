@@ -1,3 +1,10 @@
+syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo2) precise; urgency=medium
+
+  * Add a patch to handle date without a year.
+     + 0001-date-parser-handle-dates-without-a-year.patch
+
+ -- Vincent Bernat <bernat@debian.org>  Wed, 05 Aug 2015 18:56:26 +0200
+
 syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo1) precise; urgency=low
 
   * Initial version for Precise.
