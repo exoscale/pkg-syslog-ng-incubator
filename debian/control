@@ -33,3 +33,28 @@ Description: Enhanced system logging daemon (incubator modules)
  .
  This package provides modules from the incubator (modules that are
  not part of the official repository).
+
+Package: syslog-ng-incubator-mods-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Multi-Arch: foreign
+Depends: syslog-ng-incubator-mods (= ${binary:Version}), ${misc:Depends}
+Description: Enhanced system logging daemon (incubator modules, debug symbols)
+ syslog-ng is an enhanced log daemon, supporting a wide range of input
+ and output methods: syslog, unstructured text, message queues,
+ databases (SQL and NoSQL alike) and more.
+ .
+ Key features:
+ .
+  * receive and send RFC3164 and RFC5424 style syslog messages
+  * work with any kind of unstructured data
+  * receive and send JSON formatted messages
+  * classify and structure logs with builtin parsers (csv-parser(),
+    db-parser(), etc.)
+  * normalize, crunch and process logs as they flow through the system
+  * hand on messages for further processing using message queues (like
+    AMQP), files or databases (like PostgreSQL or MongoDB).
+ .
+ This package provides debug symbols for modules from the incubator
+ (modules that are not part of the official repository).

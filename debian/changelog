@@ -1,3 +1,9 @@
+syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo3) precise; urgency=medium
+
+  * Build debug symbols.
+
+ -- Vincent Bernat <bernat@debian.org>  Thu, 19 Nov 2015 12:27:01 +0100
+
 syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo2) precise; urgency=medium
 
   * Add a patch to handle date without a year.
