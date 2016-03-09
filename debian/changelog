@@ -1,3 +1,9 @@
+syslog-ng-incubator (0.4.1+git20150714+58de-0~trusty0+exo1) trusty; urgency=medium
+
+  * Forward-port to Trusty.
+
+ -- Vincent Bernat <bernat@debian.org>  Wed, 09 Mar 2016 16:42:27 +0100
+
 syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo3) precise; urgency=medium
 
   * Build debug symbols.
