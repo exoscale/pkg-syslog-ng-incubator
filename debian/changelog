@@ -1,3 +1,9 @@
+syslog-ng-incubator (0.4.1+git20150714+58de-0~xenial0+exo1) xenial; urgency=medium
+
+  * Forward-port to Xenial.
+
+ -- Vincent Bernat <bernat@debian.org>  Fri, 03 Jun 2016 07:00:23 +0200
+
 syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo3) precise; urgency=medium
 
   * Build debug symbols.
