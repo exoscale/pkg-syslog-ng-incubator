@@ -1,0 +1,2 @@
+usr/lib/syslog-ng/*/liblua.so
+usr/lib/syslog-ng/*/libmonitor-source.so

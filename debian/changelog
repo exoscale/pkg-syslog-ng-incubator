@@ -1,24 +1,109 @@
-syslog-ng-incubator (0.4.1+git20150714+58de-0~xenial0+exo1) xenial; urgency=medium
+syslog-ng-incubator (0.6.2-0.1) unstable; urgency=medium
 
-  * Forward-port to Xenial.
+  * Non-maintainer upload
+  * New upstream release compatible with syslog-ng >= 3.12
+    (Closes: #889581)
+  * Drop all patches: obsolete
+  * Drop syslog-ng-mod-date and update install files for new version
+  * Use dh_missing --fail-missing
 
- -- Vincent Bernat <bernat@debian.org>  Fri, 03 Jun 2016 07:00:23 +0200
+ -- Jeremy Bicha <jbicha@debian.org>  Sat, 07 Apr 2018 16:50:25 -0400
 
-syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo3) precise; urgency=medium
+syslog-ng-incubator (0.5.0-5) unstable; urgency=medium
 
-  * Build debug symbols.
+  * Fix FTBFS with syslog-ng 3.10.x (closes: #867213).
+  * Use -noawait triggers for plugins.
+  * Update Standards-Version to 4.0.0 and debhelper level to 10 .
 
- -- Vincent Bernat <bernat@debian.org>  Thu, 19 Nov 2015 12:27:01 +0100
+ -- Laszlo Boszormenyi (GCS) <gcs@debian.org>  Thu, 20 Jul 2017 18:00:45 +0000
 
-syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo2) precise; urgency=medium
+syslog-ng-incubator (0.5.0-4) unstable; urgency=low
 
-  * Add a patch to handle date without a year.
-     + 0001-date-parser-handle-dates-without-a-year.patch
+  * Adjust minimum syslog-ng version to build with.
 
- -- Vincent Bernat <bernat@debian.org>  Wed, 05 Aug 2015 18:56:26 +0200
+ -- Laszlo Boszormenyi (GCS) <gcs@debian.org>  Sat, 10 Dec 2016 16:17:45 +0000
 
-syslog-ng-incubator (0.4.1+git20150714+58de-0~precise0+exo1) precise; urgency=low
+syslog-ng-incubator (0.5.0-3) unstable; urgency=low
 
-  * Initial version for Precise.
+  * Add tzdata build dependency (closes: #839454).
+  * Backport upstream syslog-ng 3.8.x support patches.
 
- -- Vincent Bernat <bernat@debian.org>  Tue, 14 Jul 2015 16:15:56 +0200
+ -- Laszlo Boszormenyi (GCS) <gcs@debian.org>  Wed, 19 Oct 2016 21:36:51 +0000
+
+syslog-ng-incubator (0.5.0-2) unstable; urgency=low
+
+  * Backport upstream fix for ZeroMQ plugin (closes: #838139).
+
+ -- Laszlo Boszormenyi (GCS) <gcs@debian.org>  Thu, 06 Oct 2016 05:09:25 +0000
+
+syslog-ng-incubator (0.5.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Drop the following modules as merged to syslog-ng itself:
+    - syslog-ng-mod-elasticsearch,
+    - syslog-ng-mod-graphite,
+    - syslog-ng-mod-python,
+    - syslog-ng-mod-riemann.
+  * Add new modules:
+    - syslog-ng-mod-date,
+    - syslog-ng-mod-grok,
+    - syslog-ng-mod-kafka,
+    - syslog-ng-mod-zmq.
+  * Update Build-Depend on syslog-ng to >= 3.7.0~ (closes: #831677).
+  * Enable parallel building.
+  * Update Standards-Version to 3.9.8 .
+
+ -- Laszlo Boszormenyi (GCS) <gcs@debian.org>  Mon, 18 Jul 2016 16:29:33 +0000
+
+syslog-ng-incubator (0.3.3-2) unstable; urgency=medium
+
+  * Build-Depend on syslog-ng >= 3.5.6~, to pick up the looser
+    dependencies.
+
+ -- Gergely Nagy <algernon@madhouse-project.org>  Tue, 12 Aug 2014 16:14:10 +0200
+
+syslog-ng-incubator (0.3.3-1) unstable; urgency=medium
+
+  * New upstream release.
+    + Build-Depend on syslog-ng >= 3.5.5, as per upstream.
+
+ -- Gergely Nagy <algernon@madhouse-project.org>  Fri, 25 Jul 2014 11:28:11 +0200
+
+syslog-ng-incubator (0.3.2-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Gergely Nagy <algernon@madhouse-project.org>  Wed, 16 Jul 2014 13:12:42 +0200
+
+syslog-ng-incubator (0.3.0-1) unstable; urgency=medium
+
+  * New upstream release:
+    + New module: syslog-ng-mod-perl
+    + New module: syslog-ng-mod-python
+  * debian/copyright updated.
+
+ -- Gergely Nagy <algernon@madhouse-project.org>  Thu, 29 May 2014 13:42:55 +0200
+
+syslog-ng-incubator (0.2.1-1) unstable; urgency=medium
+
+  * New upstream release:
+    + New module: syslog-ng-mod-graphite
+    + New module: syslog-ng-mod-elasticsearch
+  * debian/copyright updated.
+
+ -- Gergely Nagy <algernon@madhouse-project.org>  Fri, 14 Mar 2014 11:34:57 +0100
+
+syslog-ng-incubator (0.1.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * New module: syslog-ng-mod-lua.
+  * Added a debian/watch file.
+  * Added a Homepage field to debian/control.
+
+ -- Gergely Nagy <algernon@madhouse-project.org>  Fri, 24 Jan 2014 16:37:42 +0100
+
+syslog-ng-incubator (0.1.0-1) unstable; urgency=low
+
+  * Initial release (closes: #728591).
+
+ -- Gergely Nagy <algernon@madhouse-project.org>  Sat, 28 Dec 2013 17:11:21 +0100
