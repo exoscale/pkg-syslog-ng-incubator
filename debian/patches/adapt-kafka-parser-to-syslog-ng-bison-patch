@@ -1,0 +1,21 @@
+Description: Adapt kafka parser to syslog-ng bison patch
+Author: Alexandros Afentoulis <alexandros.afentoulis@exoscale.ch>
+
+--- syslog-ng-incubator-0.6.2.orig/modules/kafka-c/kafka-parser.c
++++ syslog-ng-incubator-0.6.2/modules/kafka-c/kafka-parser.c
+@@ -51,4 +51,4 @@ CfgParser kafka_c_parser =
+   .cleanup = (void (*)(gpointer)) log_pipe_unref,
+ };
+ 
+-CFG_PARSER_IMPLEMENT_LEXER_BINDING(kafka_c_, LogDriver **)
++CFG_PARSER_IMPLEMENT_LEXER_BINDING(kafka_c_, KAFKA_C_, LogDriver **)
+--- syslog-ng-incubator-0.6.2.orig/modules/kafka-c/kafka-parser.h
++++ syslog-ng-incubator-0.6.2/modules/kafka-c/kafka-parser.h
+@@ -36,6 +36,6 @@ struct kafka_property {
+ 
+ void kafka_property_free(void *);
+ 
+-CFG_PARSER_DECLARE_LEXER_BINDING(kafka_c_, LogDriver **)
++CFG_PARSER_DECLARE_LEXER_BINDING(kafka_c_, KAFKA_C_, LogDriver **)
+ 
+ #endif
