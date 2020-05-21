@@ -1,0 +1,11 @@
+Description: Use own lex-rules.am file
+Author: Alexandros Afentoulis <alexandros.afentoulis@exoscale.ch>
+
+--- syslog-ng-incubator-0.6.2.orig/Makefile.am
++++ syslog-ng-incubator-0.6.2/Makefile.am
+@@ -25,4 +25,4 @@ DISTCLEANFILES		= \
+ 
+ include modules/Makefile.am
+ include tools/Makefile.am
+-include $(syslog_ng_tools)/lex-rules.am
++include lex-rules.am
