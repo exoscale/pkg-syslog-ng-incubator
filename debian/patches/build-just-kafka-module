@@ -1,0 +1,23 @@
+Description: Build just the kafka module
+Author: Alexandros Afentoulis <alexandros.afentoulis@exoscale.ch>
+
+--- syslog-ng-incubator-0.6.2.orig/modules/Makefile.am
++++ syslog-ng-incubator-0.6.2/modules/Makefile.am
+@@ -1,9 +1,9 @@
+-include modules/trigger-source/Makefile.am
+-include modules/monitor-source/Makefile.am
+-include modules/basicfuncs-plus/Makefile.am
+-include modules/rss/Makefile.am
+-include modules/lua/Makefile.am
+-include modules/perl/Makefile.am
++#include modules/trigger-source/Makefile.am
++#include modules/monitor-source/Makefile.am
++#include modules/basicfuncs-plus/Makefile.am
++#include modules/rss/Makefile.am
++#include modules/lua/Makefile.am
++#include modules/perl/Makefile.am
+ include modules/kafka-c/Makefile.am
+-include modules/zmq/Makefile.am
+-include modules/grok/Makefile.am
++#include modules/zmq/Makefile.am
++#include modules/grok/Makefile.am
