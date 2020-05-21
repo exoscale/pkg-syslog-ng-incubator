@@ -1,0 +1,14 @@
+Description: Fix logthrdestdrv.h path
+Author: Alexandros Afentoulis <alexandros.afentoulis@exoscale.ch>
+
+--- syslog-ng-incubator-0.6.2.orig/modules/kafka-c/kafka.c
++++ syslog-ng-incubator-0.6.2/modules/kafka-c/kafka.c
+@@ -34,7 +34,7 @@
+ #include "logqueue.h"
+ #include "driver.h"
+ #include "plugin-types.h"
+-#include "logthrdestdrv.h"
++#include "logthrdest/logthrdestdrv.h"
+ #include "seqnum.h"
+ 
+ /*
